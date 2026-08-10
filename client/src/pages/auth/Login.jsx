@@ -21,6 +21,10 @@ export default function Login() {
     try {
       const res = await login(data).unwrap();
 
+      if (res?.data?.accessToken) {
+        localStorage.setItem("accessToken", res.data.accessToken);
+      }
+
       dispatch(setCredentials(res.data.user));
 
       toast.success("Login Successful");
